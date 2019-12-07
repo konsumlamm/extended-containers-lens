@@ -8,13 +8,13 @@ module Data.PrioHeap.Lens () where
 import Control.Lens.Each
 import Control.Lens.Empty
 import Control.Lens.Indexed
+import Control.Lens.Iso (iso)
 import Control.Lens.Prism (nearly)
 import Control.Lens.Traversal
--- import Control.Lens.Wrapped
+import Control.Lens.Wrapped
 
 import qualified Data.PrioHeap as H
 import Data.PrioHeap (PrioHeap)
-
 
 instance (c ~ d) => Each (PrioHeap c a) (PrioHeap d b) a b where
     each = traversed
@@ -39,3 +39,12 @@ instance Ord k => TraverseMin k (PrioHeap k) where
     traverseMin f heap = case H.lookupMin heap of
         Nothing -> pure heap
         Just (key, x) -> (\x -> H.adjustMin (const x) heap) <$> indexed f key x
+
+instance Ord k => Wrapped (PrioHeap k a) where
+    type Unwrapped (PrioHeap k a) = [(k, a)]
+
+    _Wrapped' = iso H.toList H.fromList
+    {-# INLINE _Wrapped' #-}
+
+-- | Use @'wrapping' 'H.fromList'@. Unwrapping returns some permutation of the list.
+instance (t ~ PrioHeap k' a', Ord k) => Rewrapped (PrioHeap k a) t

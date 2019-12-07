@@ -7,14 +7,14 @@ module Data.AMT.Lens () where
 import Data.Foldable (toList)
 
 import Control.Lens.At
--- import Control.Lens.Cons
+import Control.Lens.Cons
 import Control.Lens.Each
 import Control.Lens.Empty
 import Control.Lens.Indexed
 import Control.Lens.Iso
-import Control.Lens.Prism (nearly)
+import Control.Lens.Prism (nearly, prism)
 import Control.Lens.Traversal (traversed)
--- import Control.Lens.Wrapped
+import Control.Lens.Wrapped
 
 import qualified Data.AMT as V
 import Data.AMT (Vector)
@@ -29,7 +29,15 @@ instance Ixed (Vector a) where
         Nothing -> pure v
         Just x -> (\x -> V.update i x v) <$> f x
 
--- instance Snoc (Vector a) (Vector b) a b
+instance Cons (Vector a) (Vector b) a b where
+    _Cons = prism (uncurry V.cons) $ \v -> case V.uncons v of
+        Nothing -> Left V.empty
+        Just x -> Right x
+
+instance Snoc (Vector a) (Vector b) a b where
+    _Snoc = prism (uncurry V.snoc) $ \v -> case V.unsnoc v of
+        Nothing -> Left V.empty
+        Just x -> Right x
 
 instance Each (Vector a) (Vector b) a b where
     each = traversed
@@ -52,3 +60,11 @@ instance TraversableWithIndex Int Vector where
 
 instance Reversing (Vector a) where
     reversing = V.fromList . reverse . toList
+
+instance Wrapped (Vector a) where
+    type Unwrapped (Vector a) = [a]
+
+    _Wrapped' = iso toList V.fromList
+    {-# INLINE _Wrapped' #-}
+
+instance (t ~ Vector a') => Rewrapped (Vector a) t

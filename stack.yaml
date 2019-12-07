@@ -41,7 +41,7 @@ packages:
 #
 extra-deps:
 - git: https://github.com/konsumlamm/extended-containers.git
-  commit: a8551e3fe8ba3d62e7c3f3a5c3522ec6cf0edfe5
+  commit: eeea99e0b3028b7b003125172e6343c4afc3f292
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

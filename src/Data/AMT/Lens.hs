@@ -23,8 +23,6 @@ type instance Index (Vector a) = Int
 type instance IxValue (Vector a) = a
 
 instance Ixed (Vector a) where
-    -- ix :: Int -> Traversal' (Vector a) a
-    -- ix :: Applicative f => Int -> (a -> f a) -> Vector a -> f (Vector a)
     ix i f v = case V.lookup i v of
         Nothing -> pure v
         Just x -> (\x -> V.update i x v) <$> f x

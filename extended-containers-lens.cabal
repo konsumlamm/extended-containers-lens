@@ -1,7 +1,8 @@
 name:                extended-containers-lens
 version:             0.1.0.0
--- synopsis:
--- description:
+synopsis:            lens instances for extended-containers
+description:
+  This package contains orphan instances of lens classes for the container types from extended-containers.
 homepage:            https://github.com/konsumlamm/extended-containers-lens#readme
 license:             BSD3
 license-file:        LICENSE

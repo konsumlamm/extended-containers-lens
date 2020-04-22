@@ -1,2 +1,10 @@
+# Stack
 .stack-work/
 stack.yaml.lock
+*.o
+*.hi
+
+# IntelliJ
+*.iml
+.idea/
+out/

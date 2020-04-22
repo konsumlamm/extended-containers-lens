@@ -6,7 +6,7 @@ module Data.Heap.Lens () where
 
 import Data.Foldable (toList)
 
-import Control.Lens.Empty
+import Control.Lens.Empty (AsEmpty(..))
 import Control.Lens.Iso (iso)
 import Control.Lens.Prism (nearly)
 import Control.Lens.Wrapped
@@ -25,3 +25,5 @@ instance Ord a => Wrapped (Heap a) where
 
 -- | Use @'wrapping' 'H.fromList'@. Unwrapping returns some permutation of the list.
 instance (t ~ Heap a', Ord a) => Rewrapped (Heap a) t
+
+-- TODO: heapOf (see: https://hackage.haskell.org/package/lens-4.17/docs/Data-Set-Lens.html#v:setOf)

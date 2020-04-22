@@ -21,6 +21,6 @@ library
     Data.AMT.Lens
     Data.Heap.Lens
     Data.PrioHeap.Lens
-  ghc-options:         -O -W -Werror
+  ghc-options:         -O -Wall -Wno-orphans
   build-depends:       base >= 4.7 && < 5, extended-containers, lens
   default-language:    Haskell2010

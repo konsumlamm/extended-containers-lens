@@ -2,12 +2,15 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module Data.AMT.Lens () where
+module Data.AMT.Lens
+    ( vectorOf
+    ) where
 
 import Data.Foldable (toList)
 import Data.Functor ((<&>))
 
 import Control.Lens.At (Ixed(..), Index, IxValue)
+import Control.Lens.Combinators (Getting, views)
 import Control.Lens.Cons (Cons(..), Snoc(..))
 import Control.Lens.Each (Each(..))
 import Control.Lens.Empty (AsEmpty(..))
@@ -81,4 +84,5 @@ instance Wrapped (Vector a) where
 
 instance (t ~ Vector a') => Rewrapped (Vector a) t
 
--- TODO: vectorOf (see: https://hackage.haskell.org/package/lens-4.17/docs/Data-Sequence-Lens.html#v:seqOf)
+vectorOf :: Getting (Vector a) s a -> s -> Vector a
+vectorOf l = views l V.singleton

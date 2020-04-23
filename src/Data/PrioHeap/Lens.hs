@@ -3,10 +3,13 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 
-module Data.PrioHeap.Lens () where
+module Data.PrioHeap.Lens
+    ( prioHeapOf
+    ) where
 
 import Data.Functor ((<&>))
 
+import Control.Lens.Combinators (IndexedGetting, iviews)
 import Control.Lens.Each (Each(..))
 import Control.Lens.Empty (AsEmpty(..))
 import Control.Lens.Indexed
@@ -66,4 +69,5 @@ instance Ord k => Wrapped (PrioHeap k a) where
 -- | Use @'wrapping' 'H.fromList'@. Unwrapping returns some permutation of the list.
 instance (t ~ PrioHeap k' a', Ord k) => Rewrapped (PrioHeap k a) t
 
--- TODO: prioHeapOf (see https://hackage.haskell.org/package/lens-4.17/docs/Data-Map-Lens.html#v:toMapOf)
+prioHeapOf :: IndexedGetting k (PrioHeap k a) s a -> s -> PrioHeap k a
+prioHeapOf l = iviews l H.singleton

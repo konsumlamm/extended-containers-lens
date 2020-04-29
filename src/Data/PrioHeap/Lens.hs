@@ -17,6 +17,7 @@ import Control.Lens.Iso (iso)
 import Control.Lens.Operators ((<&>))
 import Control.Lens.Prism (nearly)
 import Control.Lens.Traversal
+import Control.Lens.Type (IndexedGetter, IndexedFold, IndexedTraversal, IndexedLens)
 import Control.Lens.Wrapped
 
 import qualified Data.PrioHeap as H
@@ -74,6 +75,6 @@ instance Ord k => Wrapped (PrioHeap k a) where
 -- | Use @'wrapping' 'H.fromList'@. Unwrapping returns some permutation of the list.
 instance (t ~ PrioHeap k' a', Ord k) => Rewrapped (PrioHeap k a) t
 
--- | Construct a PrioHeap from a 'IndexedGetter', 'Control.Lens.Fold.IndexedFold', 'Control.Lens.Traversal.IndexedTraversal' or 'Control.Lens.Lens.IndexedLens'.
+-- | Construct a PrioHeap from a 'IndexedGetter', 'IndexedFold', 'IndexedTraversal' or 'IndexedLens'.
 prioHeapOf :: IndexedGetting k (PrioHeap k a) s a -> s -> PrioHeap k a
 prioHeapOf l = iviews l H.singleton

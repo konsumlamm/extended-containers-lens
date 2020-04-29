@@ -18,6 +18,7 @@ import Control.Lens.Iso (Reversing(..), iso)
 import Control.Lens.Operators ((<&>))
 import Control.Lens.Prism (nearly, prism)
 import Control.Lens.Traversal (traversed)
+import Control.Lens.Type (Getter, Fold, Traversal, Lens, Iso)
 import Control.Lens.Wrapped
 
 import qualified Data.AMT as V
@@ -84,6 +85,6 @@ instance Wrapped (Vector a) where
 
 instance (t ~ Vector a') => Rewrapped (Vector a) t
 
--- | Construct a 'Vector' from a 'Getter', 'Control.Lens.Fold.Fold', 'Control.Lens.Traversal.Traversal', 'Control.Lens.Lens.Lens' or 'Control.Lens.Iso.Iso'.
+-- | Construct a 'Vector' from a 'Getter', 'Fold', 'Traversal', 'Lens' or 'Iso'.
 vectorOf :: Getting (Vector a) s a -> s -> Vector a
 vectorOf l = views l V.singleton

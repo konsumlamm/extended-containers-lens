@@ -32,7 +32,7 @@ library
     Data.AMT.Lens
     Data.Heap.Lens
     Data.PrioHeap.Lens
-  ghc-options:         -O -Wall -Wno-orphans
+  ghc-options:         -Wall -Wno-orphans
   build-depends:
     base                >= 4.7 && < 5,
     extended-containers >= 0.1 && < 0.2,

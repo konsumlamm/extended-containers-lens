@@ -84,5 +84,6 @@ instance Wrapped (Vector a) where
 
 instance (t ~ Vector a') => Rewrapped (Vector a) t
 
+-- | Construct a 'Vector' from a 'Getter', 'Control.Lens.Fold.Fold', 'Control.Lens.Traversal.Traversal', 'Control.Lens.Lens.Lens' or 'Control.Lens.Iso.Iso'.
 vectorOf :: Getting (Vector a) s a -> s -> Vector a
 vectorOf l = views l V.singleton

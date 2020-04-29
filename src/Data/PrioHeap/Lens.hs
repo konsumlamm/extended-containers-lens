@@ -69,5 +69,6 @@ instance Ord k => Wrapped (PrioHeap k a) where
 -- | Use @'wrapping' 'H.fromList'@. Unwrapping returns some permutation of the list.
 instance (t ~ PrioHeap k' a', Ord k) => Rewrapped (PrioHeap k a) t
 
+-- | Construct a PrioHeap from a 'IndexedGetter', 'Control.Lens.Fold.IndexedFold', 'Control.Lens.Traversal.IndexedTraversal' or 'Control.Lens.Lens.IndexedLens'.
 prioHeapOf :: IndexedGetting k (PrioHeap k a) s a -> s -> PrioHeap k a
 prioHeapOf l = iviews l H.singleton

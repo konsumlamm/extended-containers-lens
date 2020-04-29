@@ -22,5 +22,8 @@ library
     Data.Heap.Lens
     Data.PrioHeap.Lens
   ghc-options:         -O -Wall -Wno-orphans
-  build-depends:       base >= 4.7 && < 5, extended-containers, lens
+  build-depends:
+    base                >= 4.7 && < 5,
+    extended-containers >= 0.1 && < 0.2,
+    lens                >= 4.14 && < 5
   default-language:    Haskell2010

@@ -7,7 +7,6 @@ module Data.AMT.Lens
     ) where
 
 import Data.Foldable (toList)
-import Data.Functor ((<&>))
 
 import Control.Lens.At (Ixed(..), Index, IxValue)
 import Control.Lens.Combinators (Getting, views)
@@ -16,6 +15,7 @@ import Control.Lens.Each (Each(..))
 import Control.Lens.Empty (AsEmpty(..))
 import Control.Lens.Indexed
 import Control.Lens.Iso (Reversing(..), iso)
+import Control.Lens.Operators ((<&>))
 import Control.Lens.Prism (nearly, prism)
 import Control.Lens.Traversal (traversed)
 import Control.Lens.Wrapped

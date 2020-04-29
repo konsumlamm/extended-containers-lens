@@ -7,13 +7,14 @@ module Data.PrioHeap.Lens
     ( prioHeapOf
     ) where
 
-import Data.Functor ((<&>))
+import Data.Ord (Down(..))
 
 import Control.Lens.Combinators (IndexedGetting, iviews)
 import Control.Lens.Each (Each(..))
 import Control.Lens.Empty (AsEmpty(..))
 import Control.Lens.Indexed
 import Control.Lens.Iso (iso)
+import Control.Lens.Operators ((<&>))
 import Control.Lens.Prism (nearly)
 import Control.Lens.Traversal
 import Control.Lens.Wrapped
@@ -59,6 +60,10 @@ instance Ord k => TraverseMin k (PrioHeap k) where
         Just (key, x) -> indexed f key x <&> \y -> H.adjustMin (const y) heap
 
 -- TODO: TraverseMax instance for PrioHeap (Down k)?
+instance Ord k => TraverseMax k (PrioHeap (Down k)) where
+    traverseMax f heap = case H.lookupMin heap of
+        Nothing -> pure heap
+        Just (Down key, x) -> indexed f key x <&> \y -> H.adjustMin (const y) heap
 
 instance Ord k => Wrapped (PrioHeap k a) where
     type Unwrapped (PrioHeap k a) = [(k, a)]
